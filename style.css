@@ -1,0 +1,598 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --gold: #d4af37;
+    --light-gold: #ffe6a0;
+    --dark-gold: #a67c00;
+    --black: #050505;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: radial-gradient(
+        circle at center,
+        #242018,
+        #0b0a08 55%,
+        #000000
+    );
+    color: white;
+}
+
+/* Background */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(3px);
+    opacity: 0.65;
+    animation: float 8s ease-in-out infinite alternate,
+               goldenGlow 4s ease-in-out infinite alternate;
+}
+
+.circle-one {
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, #d4af37, transparent 70%);
+    top: 5%;
+    left: 8%;
+}
+
+.circle-two {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, #99751c, transparent 70%);
+    bottom: 0;
+    right: 5%;
+    animation-delay: 2s;
+}
+
+.circle-three {
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, #ffe6a0, transparent 70%);
+    top: 55%;
+    left: 20%;
+    animation-delay: 1s;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(35px, -30px) scale(1.1);
+    }
+    100% {
+        transform: translate(-20px, 30px) scale(0.95);
+    }
+}
+
+@keyframes goldenGlow {
+    from {
+        opacity: 0.35;
+    }
+    to {
+        opacity: 0.8;
+    }
+}
+
+/* Glass Container */
+
+.clock-container {
+    position: relative;
+    width: 90%;
+    max-width: 520px;
+    padding: 40px 25px;
+    text-align: center;
+
+    background: rgba(15, 14, 11, 0.82);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 30px;
+
+    box-shadow:
+        0 0 25px rgba(212, 175, 55, 0.15),
+        0 20px 60px rgba(0, 0, 0, 0.8),
+        inset 0 0 25px rgba(212, 175, 55, 0.05);
+
+    animation: containerEntry 1s ease, borderGlow 4s infinite alternate;
+
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.clock-container:hover {
+    transform: translateY(-7px);
+    box-shadow:
+        0 0 40px rgba(212, 175, 55, 0.25),
+        0 25px 70px rgba(0, 0, 0, 0.9);
+}
+
+@keyframes containerEntry {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes borderGlow {
+    from {
+        border-color: rgba(212, 175, 55, 0.3);
+    }
+    to {
+        border-color: rgba(255, 230, 160, 0.9);
+    }
+}
+
+/* Heading */
+
+h1 {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    background: linear-gradient(
+        90deg,
+        #a67c00,
+        #ffe6a0,
+        #d4af37
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    color: #c6b78e;
+    font-size: 12px;
+    margin: 8px 0 30px;
+    letter-spacing: 2px;
+}
+
+/* Analog Clock */
+
+.analog-clock {
+    position: relative;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    margin: 0 auto 30px;
+
+    background: radial-gradient(circle, #191711, #080807);
+    border: 2px solid var(--gold);
+
+    box-shadow:
+        0 0 15px rgba(212, 175, 55, 0.4),
+        0 0 40px rgba(212, 175, 55, 0.15),
+        inset 0 0 25px rgba(212, 175, 55, 0.1);
+
+    transition: 0.4s ease;
+}
+
+.analog-clock:hover {
+    transform: scale(1.06);
+    box-shadow:
+        0 0 25px rgba(212, 175, 55, 0.7),
+        0 0 55px rgba(212, 175, 55, 0.25);
+}
+
+.number {
+    position: absolute;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--light-gold);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+}
+
+.n12 {
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.n3 {
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.n6 {
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.n9 {
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Clock Hands */
+
+.hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    border-radius: 10px;
+    transition: background 0.3s;
+}
+
+.hour {
+    width: 5px;
+    height: 48px;
+    background: linear-gradient(to top, #a67c00, #ffe6a0);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+}
+
+.minute {
+    width: 3px;
+    height: 65px;
+    background: #d4af37;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+}
+
+.second {
+    width: 2px;
+    height: 75px;
+    background: #fff0b3;
+    box-shadow: 0 0 12px #d4af37;
+}
+
+.center-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--light-gold);
+    border: 2px solid var(--dark-gold);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 12px var(--gold);
+    z-index: 5;
+}
+
+/* Digital Time */
+
+.digital-clock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    font-size: clamp(35px, 9vw, 55px);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+
+    color: var(--light-gold);
+    text-shadow:
+        0 0 10px rgba(212, 175, 55, 0.7),
+        0 0 25px rgba(212, 175, 55, 0.3);
+
+    transition: 0.4s ease;
+}
+
+.digital-clock:hover {
+    text-shadow:
+        0 0 15px #ffe6a0,
+        0 0 35px #d4af37;
+    transform: scale(1.04);
+}
+
+.colon {
+    color: var(--gold);
+    animation: blink 1s infinite;
+}
+
+#ampm {
+    font-size: 17px;
+    color: var(--gold);
+    margin-left: 5px;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* Date */
+
+.date {
+    color: #c6b78e;
+    font-size: 14px;
+    margin: 15px 0 25px;
+    transition: 0.3s;
+}
+
+.date:hover {
+    color: var(--light-gold);
+    letter-spacing: 1px;
+}
+
+/* Button */
+
+button {
+    padding: 12px 30px;
+    border: 1px solid var(--gold);
+    border-radius: 30px;
+
+    background: linear-gradient(
+        135deg,
+        #d4af37,
+        #a67c00
+    );
+
+    color: #080807;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+
+    transition: all 0.4s ease;
+}
+
+button:hover {
+    background: linear-gradient(
+        135deg,
+        #ffe6a0,
+        #d4af37
+    );
+
+    transform: translateY(-5px) scale(1.05);
+
+    box-shadow:
+        0 0 15px #d4af37,
+        0 0 30px rgba(212, 175, 55, 0.5);
+
+    letter-spacing: 1px;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Footer */
+
+.footer {
+    color: #a89b75;
+    font-size: 11px;
+    margin-top: 25px;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.footer:hover {
+    color: var(--light-gold);
+}
+
+/* Responsive */
+
+@media (max-width: 480px) {
+    .clock-container {
+        padding: 30px 15px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .analog-clock {
+        width: 165px;
+        height: 165px;
+    }
+
+    .hour {
+        height: 40px;
+    }
+
+    .minute {
+        height: 55px;
+    }
+
+    .second {
+        height: 65px;
+    }
+
+    .digital-clock {
+        gap: 2px;
+    }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===== GOLDEN TEXT ANIMATION FIX ===== */
+
+.clock-container h1 {
+    display: inline-block;
+    background: linear-gradient(
+        90deg,
+        #a67c00,
+        #fff5cc,
+        #d4af37,
+        #ffffff,
+        #a67c00
+    );
+    background-size: 300% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: headingShine 3s linear infinite,
+               headingEntry 1s ease both;
+}
+
+@keyframes headingShine {
+    0% {
+        background-position: 0% center;
+    }
+    100% {
+        background-position: 300% center;
+    }
+}
+
+@keyframes headingEntry {
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Subtitle */
+.clock-container .subtitle {
+    animation: subtitleEntry 1.5s ease both;
+    color: #e8d49b;
+}
+
+@keyframes subtitleEntry {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Digital Clock */
+.clock-container .digital-clock {
+    animation: timeEntry 1.5s ease both;
+}
+
+@keyframes timeEntry {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+        filter: blur(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+/* Golden Time Glow */
+.clock-container .digital-clock {
+    text-shadow:
+        0 0 5px #d4af37,
+        0 0 15px rgba(212,175,55,0.7),
+        0 0 30px rgba(212,175,55,0.4);
+}
+
+/* AM PM */
+.clock-container #ampm {
+    animation: ampmPulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes ampmPulse {
+    from {
+        opacity: 0.6;
+        text-shadow: 0 0 5px #d4af37;
+    }
+    to {
+        opacity: 1;
+        text-shadow: 0 0 20px #ffe6a0;
+    }
+}
+
+/* Date */
+.clock-container .date {
+    animation: dateEntry 2s ease both;
+    transition: 0.4s ease;
+}
+
+@keyframes dateEntry {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.clock-container .date:hover {
+    color: #ffe6a0;
+    letter-spacing: 2px;
+}
+
+/* Footer */
+.clock-container .footer {
+    animation: footerEntry 2.5s ease both;
+}
+
+@keyframes footerEntry {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Button Shine */
+.clock-container button {
+    overflow: hidden;
+    position: relative;
+}
+
+.clock-container button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 70%;
+    height: 100%;
+    background: rgba(255,255,255,0.35);
+    transform: skewX(-25deg);
+    transition: left 0.7s ease;
+}
+
+.clock-container button:hover::after {
+    left: 150%;
+}
